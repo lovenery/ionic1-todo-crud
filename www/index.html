@@ -50,8 +50,9 @@
         <ion-content scroll="false">
           <!-- our list and list items -->
           <ion-list>
-            <ion-item ng-repeat="task in activeProject.tasks">
+            <ion-item ng-repeat="task in activeProject.tasks" class="item item-icon-right">
               {{task.title}}
+              <button class="button button-clear button-assertive icon ion-trash-a" ng-click="deleteTask($index)"></button>
             </ion-item>
           </ion-list>
         </ion-content>
