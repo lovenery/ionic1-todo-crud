@@ -50,9 +50,10 @@
         <ion-content scroll="false">
           <!-- our list and list items -->
           <ion-list>
-            <ion-item ng-repeat="task in activeProject.tasks" class="item item-icon-right">
+            <ion-item ng-repeat="task in activeProject.tasks" class="item item-icon-left item-icon-right">
               {{task.title}}
               <button class="button button-clear button-assertive icon ion-trash-a" ng-click="deleteTask($index)"></button>
+              <button class="button button-clear button-balanced icon ion-edit" ng-click="editTask($index)"></button>
             </ion-item>
           </ion-list>
         </ion-content>
@@ -107,5 +108,37 @@
       </div>
 
     </script>
+
+
+    <script id="edit-task.html" type="text/ng-template">
+
+      <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-secondary">
+          <h1 class="title">Edit Task</h1>
+          <button class="button button-clear button-positive" ng-click="closeEditTask()">Cancel</button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+          <form ng-submit="updateTask(etask)">
+            <div class="list">
+              <label class="item item-input">
+                <input type="text" placeholder="What do you need to do?" ng-model="etask.title">
+              </label>
+            </div>
+            <div class="padding">
+              <button type="submit" class="button button-block button-positive">Update Task</button>
+            </div>
+          </form>
+
+        </ion-content>
+
+      </div>
+
+    </script>
+
   </body>
 </html>

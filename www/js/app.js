@@ -121,6 +121,32 @@ var app = angular.module('todo', ['ionic'])
     $ionicSideMenuDelegate.toggleLeft();
   };
 
+
+  // 更新
+  $ionicModal.fromTemplateUrl('edit-task.html', function(modalQQ) {
+    $scope.edit_taskModal = modalQQ;
+  }, {
+    scope: $scope
+  });
+  $scope.closeEditTask = function() {
+    $scope.edit_taskModal.hide();
+  };
+  $scope.editTask = function($index) {
+    $scope.etask = $scope.activeProject.tasks[$index];
+    $scope.etask.id = $index;
+    $scope.edit_taskModal.show();
+  };
+  $scope.updateTask = function(etask) {
+    if(!$scope.activeProject || !etask) {
+      return;
+    }
+    $scope.activeProject.tasks[etask.id].title = etask.title;
+    $scope.edit_taskModal.hide();
+
+    // Inefficient, but save all the projects
+    Projects.save($scope.projects);
+  };
+
   // 刪除
   $scope.deleteTask = function (index) {
     $scope.activeProject.tasks.splice(index,1);
